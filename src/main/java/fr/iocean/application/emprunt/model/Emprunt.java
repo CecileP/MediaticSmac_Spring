@@ -48,6 +48,12 @@ public class Emprunt implements IOEntity {
 	}
 	
 	public Emprunt(){}
+	public Emprunt(Emprunt e) {
+		this.adherent = e.adherent;
+		this.media = e.media;
+		this.dateEmprunt = e.dateEmprunt;
+		this.dateRetour = e.dateRetour;
+	}
 	
 	@Override
 	public Long getId() {

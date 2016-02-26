@@ -10,8 +10,8 @@ import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import fr.iocean.application.persistence.IOEntity;
 import fr.iocean.application.exception.NotFoundException;
+import fr.iocean.application.persistence.IOEntity;
 
 @Repository
 public abstract class AbstractJpaRepository<T extends IOEntity> {
@@ -61,13 +61,10 @@ public abstract class AbstractJpaRepository<T extends IOEntity> {
 		em.merge(entity);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<T> findAll() {
 		return getSession().createCriteria(entityClass).list();
 	}
-
-	
 
 	@Transactional
 	public void delete(T entity) {
@@ -76,7 +73,4 @@ public abstract class AbstractJpaRepository<T extends IOEntity> {
 		else
 			em.remove(entity);
 	}
-	
-	
-
 }
