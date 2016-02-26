@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import fr.iocean.application.persistence.IOEntity;
+import fr.iocean.application.exception.NotFoundException;
 
 @Repository
 public abstract class AbstractJpaRepository<T extends IOEntity> {
@@ -46,8 +47,12 @@ public abstract class AbstractJpaRepository<T extends IOEntity> {
 	}
 
 	@Transactional
-	public T findOne(Long id) {
-		return em.find(entityClass, id);
+	public T findOne(Long id) throws NotFoundException {
+		T t=em.find(entityClass, id);
+		
+		if(t==null)
+			throw new NotFoundException(); 
+		return t;
 	}
 	
 	public void update(Object entity) {
@@ -62,13 +67,13 @@ public abstract class AbstractJpaRepository<T extends IOEntity> {
 
 	
 
-//	@Transactional
-//	public void delete(T entity) {
-//		if (!getSession().contains(entity))
-//			em.remove(getSession().merge(entity));
-//		else
-//			em.remove(entity);
-//	}
+	@Transactional
+	public void delete(T entity) {
+		if (!getSession().contains(entity))
+			em.remove(getSession().merge(entity));
+		else
+			em.remove(entity);
+	}
 	
 	
 
