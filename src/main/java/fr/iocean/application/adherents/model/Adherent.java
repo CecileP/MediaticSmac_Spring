@@ -6,18 +6,33 @@ import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
-import modele.media.Media;
+import fr.iocean.application.emprunt.model.Emprunt;
+import fr.iocean.application.media.model.Media;
+import fr.iocean.application.persistence.IOEntity;
 
 @Entity
-public class Adherent extends Personne {
+@Table(name = "adherent")
+public class Adherent extends Personne implements IOEntity{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Column
 	protected LocalDate dateNaissance, dateCotisation;
 	
 	@OneToMany(mappedBy = "adherent")
 	protected Collection<Emprunt> listeMediaEmpruntes;
+	
+	@Id
+	@GeneratedValue
+	private Long id;
 	
 	@Column
 	protected int montantCotisation;
@@ -93,6 +108,18 @@ public class Adherent extends Personne {
 				return a2 - a1;
 		}
 
+	}
+
+	@Override
+	public Long getId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setId(Long id) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

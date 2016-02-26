@@ -1,5 +1,7 @@
 package fr.iocean.application.repository;
 
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -54,21 +56,21 @@ public abstract class AbstractJpaRepository<T extends IOEntity> {
 		em.merge(entity);
 	}
 
-//	@SuppressWarnings("unchecked")
-//	@Transactional
-//	public List<T> findAll() {
-//		return getSession().createCriteria(entityClass).list();
-//	}
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<T> findAll() {
+		return getSession().createCriteria(entityClass).list();
+	}
 
 	
 
-//	@Transactional
-//	public void delete(T entity) {
-//		if (!getSession().contains(entity))
-//			em.remove(getSession().merge(entity));
-//		else
-//			em.remove(entity);
-//	}
+	@Transactional
+	public void delete(T entity) {
+		if (!getSession().contains(entity))
+			em.remove(getSession().merge(entity));
+		else
+			em.remove(entity);
+	}
 	
 	
 
