@@ -5,6 +5,11 @@ import javax.persistence.Entity;
 @Entity
 public class DVD extends Media {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public DVD (String titre, String auteur) {
 		super(titre, auteur);
 	}

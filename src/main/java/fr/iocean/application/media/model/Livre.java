@@ -5,6 +5,11 @@ import javax.persistence.Entity;
 @Entity
 public class Livre extends Media {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public Livre(String titre, String auteur) {
 		super(titre, auteur);
 	}

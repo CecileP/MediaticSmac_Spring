@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import fr.iocean.application.adherents.model.Adherent;
 import fr.iocean.application.adherents.repository.AdherentRepository;
-import fr.iocean.exception.NotFoundException;
+import fr.iocean.application.exception.NotFoundException;
 
 @Service
 public class AdherentService {

@@ -5,6 +5,12 @@ import javax.persistence.Entity;
 @Entity
 public class CD extends Media {
 	
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public CD(){
 		super();
 	}
