@@ -9,16 +9,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import fr.iocean.application.media.model.Media;
 import fr.iocean.application.adherents.model.Adherent;
+import fr.iocean.application.media.model.Media;
+import fr.iocean.application.persistence.IOEntity;
 
 
 @Entity
-public class Emprunt {
+public class Emprunt implements IOEntity {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long ID;
+	private Long id;
 
 	@ManyToOne
 	protected Adherent adherent;
@@ -48,10 +49,14 @@ public class Emprunt {
 	
 	public Emprunt(){}
 	
-	public Long getID() {
-		return ID;
+	@Override
+	public Long getId() {
+		return id;
 	}
-	
+	@Override
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public Adherent getAdherent() {
 		return adherent;
