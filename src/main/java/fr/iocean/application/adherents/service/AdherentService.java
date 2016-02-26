@@ -39,4 +39,9 @@ public class AdherentService {
 		return a;
 	}
 	
+	public void delete(Long id) throws NotFoundException {
+		Adherent a = adherentRepository.findOne(id);
+		adherentRepository.delete(a);
+	}
+	
 }
