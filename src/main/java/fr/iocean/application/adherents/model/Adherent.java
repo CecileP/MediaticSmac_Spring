@@ -8,7 +8,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
-import modele.media.Media;
+import fr.iocean.application.emprunt.model.Emprunt;
+import fr.iocean.application.media.model.Media;
 
 @Entity
 public class Adherent extends Personne {
