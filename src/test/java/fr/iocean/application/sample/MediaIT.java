@@ -39,7 +39,7 @@ public class MediaIT extends IntegrationTest {
 		u.setTypeMedia(TypeMedia.DVD);
 		System.out.println(u);
 		System.out.println(jsonHelper.serialize(u));
-		
+
 		this.mockMvc.perform(post("/api/medias")
 				.contentType(MediaType.APPLICATION_JSON)
 				.characterEncoding("UTF-8")
@@ -51,7 +51,7 @@ public class MediaIT extends IntegrationTest {
 			.andExpect(jsonPath("$",hasSize(3)))
 			.andExpect(status().isOk());
 	}
-	
+
 	@Test
 	public void testCreateNotValid() throws Exception{
 		Media u = new Media();
@@ -63,7 +63,7 @@ public class MediaIT extends IntegrationTest {
 					.andDo(MockMvcResultHandlers.print())
 					.andExpect(status().isPreconditionFailed());
 	}
-	
+
 /*-------------------- fingbyid  -----------------------------*/
 	
 	@Test
@@ -91,7 +91,7 @@ public class MediaIT extends IntegrationTest {
 					.andExpect(jsonPath("$",hasSize(2)))
 					.andExpect(status().isOk());
 	}
-	
+
 /* ---------------------  update -------------------*/
 	
 	@Test
@@ -108,7 +108,7 @@ public class MediaIT extends IntegrationTest {
 					.andExpect(jsonPath("$.titre").value("tir"))
 					.andExpect(status().isOk());
 	}
-	
+
 /*------------- delete --------------*/
 	
 	@Test(expected=NotFoundException.class)
