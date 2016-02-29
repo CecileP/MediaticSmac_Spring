@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import fr.iocean.application.adherents.model.Adherent;
 import fr.iocean.application.media.model.Media;
 import fr.iocean.application.persistence.IOEntity;
@@ -27,6 +29,7 @@ public class Emprunt implements IOEntity {
 	protected Adherent adherent;
 	
 	@ManyToOne
+	@JsonIgnoreProperties("emprunts")
 	protected Media media;
 	
 	@Column

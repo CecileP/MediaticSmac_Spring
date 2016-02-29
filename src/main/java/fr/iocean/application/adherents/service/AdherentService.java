@@ -14,11 +14,11 @@ public class AdherentService {
 
 	@Autowired
 	AdherentRepository adherentRepository;
-	
+
 	public void save(Adherent adh){
 		adherentRepository.save(adh);
 	}
-	
+
 	public List<Adherent> findAll() {
 		return adherentRepository.findAll();
 	}
@@ -30,7 +30,7 @@ public class AdherentService {
 			adherentRepository.save(adherent);
 		}
 	}
-	
+
 	public Adherent findOne(Long id) throws NotFoundException {
 		Adherent a = adherentRepository.findOne(id);
 
@@ -38,10 +38,9 @@ public class AdherentService {
 			throw new NotFoundException();
 		return a;
 	}
-	
+
 	public void delete(Long id) throws NotFoundException {
 		Adherent a = adherentRepository.findOne(id);
 		adherentRepository.delete(a);
 	}
-	
 }

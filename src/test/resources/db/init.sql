@@ -1,2 +1,2 @@
 -- test init data
-SELECT 1
+SELECT 1;

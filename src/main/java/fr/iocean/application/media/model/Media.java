@@ -27,13 +27,9 @@ public abstract class Media implements IOEntity {
 
 	private static final long serialVersionUID = -5876776304798188521L;
 
-
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Long id;
-
-	
 
 	@NotBlank
 	@Length(max=50)
@@ -61,8 +57,6 @@ public abstract class Media implements IOEntity {
 		this.emprunte = false;
 	}
 
-	
-	
 	@Override
 	public Long getId() {
 		return id;
@@ -72,12 +66,12 @@ public abstract class Media implements IOEntity {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 	public abstract String getType();
 	public abstract int getNbJoursLoues();
 
 
-	
+
 	public String getTitre() {
 		return titre;
 	}
@@ -94,7 +88,7 @@ public abstract class Media implements IOEntity {
 		this.auteur = auteur;
 	}
 
-	
+
 	public List<Emprunt> getEmprunts() {
 		return emprunts;
 	}
@@ -106,12 +100,12 @@ public abstract class Media implements IOEntity {
 		emprunts.add(e);
 		emprunte = true;
 	}
-	
+
 	public boolean estEmprunte() {
 		return emprunte;
 	}
 
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
