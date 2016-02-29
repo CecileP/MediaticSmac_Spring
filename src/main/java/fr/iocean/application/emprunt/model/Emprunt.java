@@ -20,7 +20,8 @@ import fr.iocean.application.persistence.IOEntity;
 public class Emprunt implements IOEntity {
 	
 	private static final long serialVersionUID = -1487635178830374220L;
-
+	
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
@@ -39,7 +40,7 @@ public class Emprunt implements IOEntity {
 		this.adherent = a;
 		this.media = m;
 		this.dateEmprunt = dateEmprunt;
-		dateRetour = dateEmprunt.plusDays(media.getNbJoursLoues());
+		dateRetour = null;
 		a.ajoutMedia(this);
 		m.ajouterEmprunt(this);
 	}

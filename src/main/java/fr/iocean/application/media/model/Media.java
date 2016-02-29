@@ -3,8 +3,9 @@ package fr.iocean.application.media.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,21 +16,35 @@ import javax.persistence.UniqueConstraint;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 
 import fr.iocean.application.emprunt.model.Emprunt;
+import fr.iocean.application.exception.NotFoundException;
 import fr.iocean.application.persistence.IOEntity;
 
+ 
 
 @Entity
 @Table(uniqueConstraints={@UniqueConstraint(columnNames={"titre","auteur"})})
 @Inheritance
-public abstract class Media implements IOEntity {
+public class Media implements IOEntity {
 
+	public enum TypeMedia{
+		DVD,
+		CD,
+		Livre};
+
+	
 	private static final long serialVersionUID = -5876776304798188521L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Long id;
+
+	@Enumerated(EnumType.STRING)
+	private TypeMedia typeMedia;
+
 
 	@NotBlank
 	@Length(max=50)
@@ -42,19 +57,34 @@ public abstract class Media implements IOEntity {
 	@OneToMany(mappedBy = "media")
 	private List<Emprunt> emprunts;
 
-	@NotBlank
 	private boolean emprunte;
 
 	public Media() {
 		emprunts = new ArrayList<Emprunt>();
-		emprunte = true;
+		emprunte = false;
 	}
 	
-	protected Media(String titre, String auteur) {
+	protected Media(String titre, String auteur,TypeMedia type) {
+		this.titre = titre;
+		this.auteur = auteur;
+		this.typeMedia=type;
+		this.emprunts = new ArrayList<Emprunt>();
+		this.emprunte = false;
+	}
+	
+	protected Media(String titre, String auteur,String type) throws NotFoundException {
 		this.titre = titre;
 		this.auteur = auteur;
 		this.emprunts = new ArrayList<Emprunt>();
 		this.emprunte = false;
+		
+		this.typeMedia=null;
+		try {
+			this.typeMedia = TypeMedia.valueOf(type);
+		} catch (Exception e) {
+				throw new NotFoundException("type media non trouve : "+type);
+		}
+				
 	}
 
 	@Override
@@ -67,8 +97,6 @@ public abstract class Media implements IOEntity {
 		this.id = id;
 	}
 
-	public abstract String getType();
-	public abstract int getNbJoursLoues();
 
 
 
@@ -86,6 +114,15 @@ public abstract class Media implements IOEntity {
 
 	public void setAuteur(String auteur) {
 		this.auteur = auteur;
+	}
+
+
+	public TypeMedia getTypeMedia() {
+		return typeMedia;
+	}
+
+	public void setTypeMedia(TypeMedia type) {
+		this.typeMedia = type;
 	}
 
 
@@ -130,6 +167,6 @@ public abstract class Media implements IOEntity {
 
 	@Override
 	public String toString() {
-		return "Media [ID=" + id + ", titre=" + titre + ", auteur=" + auteur + ", emprunte=" + emprunte + "]";
+		return "Media [ID=" + id + ", titre=" + titre + ", auteur=" + auteur + ", emprunte=" + emprunte + ", type="+this.getTypeMedia()+"]";
 	}
 }
