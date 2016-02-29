@@ -1,5 +1,7 @@
 package fr.iocean.application.media.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,5 +45,9 @@ public class MediaService {
 		this.mediaRepository.delete(resource);
 	}
 	
+	
+	public List<Media> rechercheMedia(String titre, String auteur, String type){
+		return this.mediaRepository.rechercheMedia(titre, auteur, type);
+	}
 	
 }
