@@ -1,8 +1,8 @@
 package fr.iocean.application.emprunt.exception;
 
-public class EmpruntNonTrouve extends EmpruntException {
+public class EmpruntNonTrouveException extends EmpruntException {
 
-	public EmpruntNonTrouve(String champ, Object valeur) {
+	public EmpruntNonTrouveException(String champ, Object valeur) {
 		super(champ, valeur);
 	}
 
