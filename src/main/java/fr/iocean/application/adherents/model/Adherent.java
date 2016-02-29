@@ -8,9 +8,13 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 import fr.iocean.application.emprunt.model.Emprunt;
 import fr.iocean.application.media.model.Media;
@@ -22,12 +26,15 @@ public class Adherent extends Personne implements IOEntity {
 
 	private static final long serialVersionUID = 1L;
 
+	@NotNull
 	protected Date dateNaissance;
+	
 	protected Date dateCotisation;
 
-	@OneToMany(mappedBy = "adherent")
+	@OneToMany(mappedBy = "adherent",fetch= FetchType.EAGER)
 	protected Collection<Emprunt> listeMediaEmpruntes;
 
+	@NotNull
 	@Embedded
 	protected Personne personne;
 
@@ -35,8 +42,17 @@ public class Adherent extends Personne implements IOEntity {
 	@GeneratedValue
 	private Long id;
 
+	@NotNull
+	@NotBlank
+	private String adresseMail;
+
 	@Column
-	protected int montantCotisation;
+	private int montantCotisation;
+	private String adresse;
+	private Integer codePostal;
+	private String ville;
+
+	
 
 	public Adherent() {
 		listeMediaEmpruntes = new ArrayList<Emprunt>();
@@ -49,6 +65,40 @@ public class Adherent extends Personne implements IOEntity {
 		listeMediaEmpruntes = new ArrayList<Emprunt>();
 	}
 
+	
+	public String getAdresse() {
+		return adresse;
+	}
+
+	public void setAdresse(String adresse) {
+		this.adresse = adresse;
+	}
+
+	public Integer getCodePostal() {
+		return codePostal;
+	}
+
+	public void setCodePostal(Integer codePostal) {
+		this.codePostal = codePostal;
+	}
+
+	public String getVille() {
+		return ville;
+	}
+
+	public void setVille(String ville) {
+		this.ville = ville;
+	} 
+	
+	
+	public String getAdresseMail() {
+		return adresseMail;
+	}
+
+	public void setAdresseMail(String adresseMail) {
+		this.adresseMail = adresseMail;
+	}
+	
 	public Personne getPersonne() {
 		return personne;
 	}

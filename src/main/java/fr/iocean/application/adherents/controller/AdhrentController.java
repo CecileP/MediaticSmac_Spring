@@ -31,7 +31,7 @@ public class AdhrentController {
 
 	@RequestMapping(value = "{id}", method = RequestMethod.GET)
 	public Adherent findById(@PathVariable Long id) throws NotFoundException {
-		return adherentService.findOne(id);
+		return adherentService.findById(id);
 	}
 
 	// @PreAuthorize("hasAuthority('MANAGE_Adherent')")

@@ -31,7 +31,7 @@ public class AdherentService {
 		}
 	}
 
-	public Adherent findOne(Long id) throws NotFoundException {
+	public Adherent findById(Long id) throws NotFoundException {
 		Adherent a = adherentRepository.findOne(id);
 
 		if (a == null)

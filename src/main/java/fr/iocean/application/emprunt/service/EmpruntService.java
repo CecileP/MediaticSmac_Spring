@@ -81,7 +81,7 @@ public class EmpruntService {
 		Adherent a;
 
 		try {
-			a = adherentService.findOne(id);
+			a = adherentService.findById(id);
 		} catch (NotFoundException e) {
 			return new ArrayList<>();
 		}

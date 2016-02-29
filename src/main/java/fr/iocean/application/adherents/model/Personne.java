@@ -1,11 +1,18 @@
 package fr.iocean.application.adherents.model;
 
 import javax.persistence.Embeddable;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 @Embeddable
 public class Personne {
 
+	@NotNull
+	@NotBlank
 	protected String nom;
+	@NotNull
+	@NotBlank
 	protected String prenom;
 
 	public Personne() {
