@@ -58,7 +58,7 @@ public class EmpruntController {
 			method = RequestMethod.GET,
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public List<Emprunt> rechercherParAdherent(@PathVariable long id) {
+	public List<Emprunt> rechercherParAdherent(@PathVariable Long id) {
 		List<Emprunt> l = this.service.rechercherParAdherent(id);
 		return l;
 	}

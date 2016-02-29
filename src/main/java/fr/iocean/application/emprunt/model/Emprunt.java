@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import fr.iocean.application.adherents.model.Adherent;
 import fr.iocean.application.media.model.Media;
 import fr.iocean.application.persistence.IOEntity;
@@ -18,7 +20,8 @@ import fr.iocean.application.persistence.IOEntity;
 public class Emprunt implements IOEntity {
 	
 	private static final long serialVersionUID = -1487635178830374220L;
-
+	
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
@@ -27,6 +30,7 @@ public class Emprunt implements IOEntity {
 	protected Adherent adherent;
 	
 	@ManyToOne
+	@JsonIgnoreProperties("emprunts")
 	protected Media media;
 	
 	@Column
@@ -36,7 +40,7 @@ public class Emprunt implements IOEntity {
 		this.adherent = a;
 		this.media = m;
 		this.dateEmprunt = dateEmprunt;
-		dateRetour = dateEmprunt.plusDays(media.getNbJoursLoues());
+		dateRetour = null;
 		a.ajoutMedia(this);
 		m.ajouterEmprunt(this);
 	}

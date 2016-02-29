@@ -12,4 +12,8 @@ public class NotFoundException extends NoSuchRequestHandlingMethodException{
 	public NotFoundException(){
 		super("resource not found", NotFoundException.class);
 	}
+	
+	public NotFoundException(String str){
+		super(str, NotFoundException.class);
+	}
 }
