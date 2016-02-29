@@ -25,27 +25,38 @@ public class EmpruntController {
 	@Autowired
 	private EmpruntService service;
 
-	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(
+			method = RequestMethod.POST,
+			consumes = MediaType.APPLICATION_JSON_VALUE,
+			produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public Emprunt ajouter(@RequestBody @Valid Emprunt emprunt) {
 		this.service.ajouter(emprunt);
 		return emprunt;
 	}
 
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(
+			method = RequestMethod.GET,
+			produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public List<Emprunt> findAll() {
 		return this.service.findAll();
 	}
 
-	@RequestMapping(value = "/media/{id}", method = RequestMethod.GET)
+	@RequestMapping(
+			value = "/media/{id}",
+			method = RequestMethod.GET,
+			produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public List<Emprunt> rechercherParMedia(@PathVariable long id) {
 		List<Emprunt> l = this.service.rechercherParMedia(id);
 		return l;
 	}
 
-	@RequestMapping(value = "/adherent/{id}", method = RequestMethod.GET)
+	@RequestMapping(
+			value = "/adherent/{id}",
+			method = RequestMethod.GET,
+			produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public List<Emprunt> rechercherParAdherent(@PathVariable long id) {
 		List<Emprunt> l = this.service.rechercherParAdherent(id);
