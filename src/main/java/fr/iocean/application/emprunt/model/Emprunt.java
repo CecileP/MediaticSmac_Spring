@@ -1,8 +1,8 @@
 package fr.iocean.application.emprunt.model;
 
 import java.time.LocalDate;
+import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import fr.iocean.application.adherents.model.Adherent;
 import fr.iocean.application.media.model.Media;
 import fr.iocean.application.persistence.IOEntity;
+
 
 
 @Entity
@@ -33,10 +34,10 @@ public class Emprunt implements IOEntity {
 	@JsonIgnoreProperties("emprunts")
 	protected Media media;
 	
-	@Column
-	protected LocalDate dateEmprunt, dateRetour;
+	protected Date dateEmprunt;
+	protected Date dateRetour;
 
-	public Emprunt(Adherent a, Media m, LocalDate dateEmprunt) {
+	public Emprunt(Adherent a, Media m, Date dateEmprunt) {
 		this.adherent = a;
 		this.media = m;
 		this.dateEmprunt = dateEmprunt;
@@ -78,19 +79,19 @@ public class Emprunt implements IOEntity {
 		this.media = media;
 	}
 
-	public LocalDate getDateEmprunt() {
+	public Date getDateEmprunt() {
 		return dateEmprunt;
 	}
 
-	public void setDateEmprunt(LocalDate dateEmprunt) {
+	public void setDateEmprunt(Date dateEmprunt) {
 		this.dateEmprunt = dateEmprunt;
 	}
 
-	public LocalDate getDateRetour() {
+	public Date getDateRetour() {
 		return dateRetour;
 	}
 
-	public void setDateRetour(LocalDate dateRetour) {
+	public void setDateRetour(Date dateRetour) {
 		this.dateRetour = dateRetour;
 	}
 

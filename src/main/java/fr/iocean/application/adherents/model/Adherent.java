@@ -3,6 +3,7 @@ package fr.iocean.application.adherents.model;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -13,6 +14,7 @@ import javax.persistence.OneToMany;
 
 import fr.iocean.application.emprunt.model.Emprunt;
 import fr.iocean.application.media.model.Media;
+import fr.iocean.application.persistence.ConvertDate;
 import fr.iocean.application.persistence.IOEntity;
 
 @Entity
@@ -20,8 +22,8 @@ public class Adherent extends Personne implements IOEntity {
 
 	private static final long serialVersionUID = 1L;
 
-	@Column
-	protected LocalDate dateNaissance, dateCotisation;
+	protected Date dateNaissance;
+	protected Date dateCotisation;
 
 	@OneToMany(mappedBy = "adherent")
 	protected Collection<Emprunt> listeMediaEmpruntes;
@@ -40,7 +42,7 @@ public class Adherent extends Personne implements IOEntity {
 		listeMediaEmpruntes = new ArrayList<Emprunt>();
 	}
 
-	public Adherent(String nom, String prenom, LocalDate date) {
+	public Adherent(String nom, String prenom, Date date) {
 		this.personne = new Personne(nom, prenom);
 		this.dateNaissance = date;
 
@@ -71,24 +73,26 @@ public class Adherent extends Personne implements IOEntity {
 		return listeMediaEmpruntes.remove(m);
 	}
 
-	public LocalDate getDateNaissance() {
+	public Date getDateNaissance() {
 		return dateNaissance;
 	}
 
-	public void setDateNaissance(LocalDate dateNaissance) {
+	public void setDateNaissance(Date dateNaissance) {
 		this.dateNaissance = dateNaissance;
 	}
 
-	public LocalDate getDateCotisation() {
+	public Date getDateCotisation() {
 		return dateCotisation;
 	}
 
-	public void setDateCotisation(LocalDate dateCotisation) {
+	public void setDateCotisation(Date dateCotisation) {
 		this.dateCotisation = dateCotisation;
 	}
 
 	public int calculAge() {
 		int d1, m1, a1;
+		LocalDate dateNaissance = ConvertDate.dateToLocalDate(this.dateNaissance);
+
 		d1 = dateNaissance.getDayOfMonth();
 		m1 = dateNaissance.getMonthValue();
 		a1 = dateNaissance.getYear();

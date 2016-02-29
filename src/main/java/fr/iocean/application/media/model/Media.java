@@ -64,7 +64,7 @@ public class Media implements IOEntity {
 		emprunte = false;
 	}
 	
-	protected Media(String titre, String auteur,TypeMedia type) {
+	public Media(String titre, String auteur,TypeMedia type) {
 		this.titre = titre;
 		this.auteur = auteur;
 		this.typeMedia=type;
@@ -72,7 +72,7 @@ public class Media implements IOEntity {
 		this.emprunte = false;
 	}
 	
-	protected Media(String titre, String auteur,String type) throws NotFoundException {
+	public Media(String titre, String auteur,String type) throws NotFoundException {
 		this.titre = titre;
 		this.auteur = auteur;
 		this.emprunts = new ArrayList<Emprunt>();

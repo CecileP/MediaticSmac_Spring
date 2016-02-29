@@ -1,6 +1,6 @@
 
-INSERT INTO media (id, titre, auteur, emprunte, dtype) VALUES (1, 'Les Misérables', 'Victor Hugo' , true,  'Livre');
-INSERT INTO media (id, titre, auteur, emprunte, dtype) VALUES (2, 'Star Wars',      'George Lucas', false, 'DVD');
+INSERT INTO media (id, titre, auteur, emprunte, type_media) VALUES (1, 'Les Misérables', 'Victor Hugo' , true,  'Livre');
+INSERT INTO media (id, titre, auteur, emprunte, type_media) VALUES (2, 'Star Wars',      'George Lucas', false, 'DVD');
 INSERT INTO adherent (id, prenom, nom, date_naissance, montant_cotisation, date_cotisation)
 	VALUES (10, 'Paul', 'Dupont', DATE '2000-01-02', 15, DATE '2015-06-01');
 

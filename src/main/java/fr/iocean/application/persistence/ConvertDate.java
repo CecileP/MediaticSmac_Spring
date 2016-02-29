@@ -1,7 +1,9 @@
 package fr.iocean.application.persistence;
 
-import java.time.LocalDate;
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.ZoneId;
+
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
@@ -14,5 +16,13 @@ public class ConvertDate implements AttributeConverter<LocalDate, Date> {
 
 	public LocalDate convertToEntityAttribute(Date value) {
 		return value == null ? null :value.toLocalDate();
+	}
+
+	public static LocalDate dateToLocalDate(java.util.Date d) {
+		return d.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+	}
+
+	public static java.util.Date localDateToDate(LocalDate ld) {
+		return Date.from(ld.atStartOfDay(ZoneId.systemDefault()).toInstant());
 	}
 }
