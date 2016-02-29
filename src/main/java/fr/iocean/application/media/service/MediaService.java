@@ -39,9 +39,9 @@ public class MediaService {
 		return this.mediaRepository.save(resource);
 	}
 	
-//	public List<Media> findAll(){
-//		return this.mediaRepository.findAll();
-//	}
+	public List<Media> findAll(){
+		return this.mediaRepository.findAll();
+	}
 	
 	public void delete(Media resource){
 		this.mediaRepository.delete(resource);

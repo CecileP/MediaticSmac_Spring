@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -54,7 +55,7 @@ public class Media implements IOEntity {
 	@Length(max=50)
 	private String auteur;
 
-	@OneToMany(mappedBy = "media")
+	@OneToMany(mappedBy = "media", fetch=FetchType.EAGER)
 	private List<Emprunt> emprunts;
 
 	private boolean emprunte;
