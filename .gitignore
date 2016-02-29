@@ -4,3 +4,4 @@ target/
 .eclipse-pmd
 .project
 .settings/
+src/main/resources/db_local.properties

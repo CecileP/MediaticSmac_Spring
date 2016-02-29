@@ -4,6 +4,7 @@ import org.springframework.boot.bind.RelaxedPropertyResolver;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 
 import com.google.common.base.Strings;
@@ -11,6 +12,7 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
+@PropertySource("classpath:db_local.properties")
 public class JPAConfiguration implements EnvironmentAware {
 
     private RelaxedPropertyResolver propertyResolver;
