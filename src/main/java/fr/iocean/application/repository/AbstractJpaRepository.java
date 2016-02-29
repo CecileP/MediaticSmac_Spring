@@ -32,7 +32,6 @@ public abstract class AbstractJpaRepository<T extends IOEntity> {
 		return em.unwrap(Session.class);
 	}
 
-
 	@Transactional
 	public T save(T entity) {
 		if (isNew(entity)) {
@@ -43,24 +42,25 @@ public abstract class AbstractJpaRepository<T extends IOEntity> {
 
 		return entity;
 	}
-	
-	public boolean isNew(T entity){
+
+	public boolean isNew(T entity) {
 		return entity.getId() == null;
 	}
 
 	@Transactional
 	public T findOne(Long id) throws NotFoundException {
-		T t=em.find(entityClass, id);
-		
-		if(t==null)
-			throw new NotFoundException(); 
+		T t = em.find(entityClass, id);
+
+		if (t == null)
+			throw new NotFoundException();
 		return t;
 	}
-	
+
 	public void update(Object entity) {
 		em.merge(entity);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<T> findAll() {
 		return getSession().createCriteria(entityClass).list();

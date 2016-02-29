@@ -10,14 +10,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 import fr.iocean.application.emprunt.model.Emprunt;
 import fr.iocean.application.media.model.Media;
 import fr.iocean.application.persistence.IOEntity;
 
 @Entity
-public class Adherent implements IOEntity{
+public class Adherent extends Personne implements IOEntity {
 
 	private static final long serialVersionUID = 1L;
 
@@ -28,7 +27,7 @@ public class Adherent implements IOEntity{
 	protected Collection<Emprunt> listeMediaEmpruntes;
 
 	@Embedded
-	private Personne personne;
+	protected Personne personne;
 
 	@Id
 	@GeneratedValue
@@ -46,6 +45,14 @@ public class Adherent implements IOEntity{
 		this.dateNaissance = date;
 
 		listeMediaEmpruntes = new ArrayList<Emprunt>();
+	}
+
+	public Personne getPersonne() {
+		return personne;
+	}
+
+	public void setPersonne(Personne personne) {
+		this.personne = personne;
 	}
 
 	public int getMontantCotisation() {
@@ -78,13 +85,6 @@ public class Adherent implements IOEntity{
 
 	public void setDateCotisation(LocalDate dateCotisation) {
 		this.dateCotisation = dateCotisation;
-	}
-
-
-	public String toString() {
-		return "Adherent [ID=" + id + ", nom=" + this.personne.getNom() + ", prenom=" + this.personne.getPrenom() + ", dateNaissance=" + dateNaissance
-				+ ", dateCotisation=" + dateCotisation +  "]";
-
 	}
 
 	public int calculAge() {

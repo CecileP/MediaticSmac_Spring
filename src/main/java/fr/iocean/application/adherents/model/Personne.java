@@ -1,12 +1,6 @@
 package fr.iocean.application.adherents.model;
 
-import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.MappedSuperclass;
 
 @Embeddable
 public class Personne {
