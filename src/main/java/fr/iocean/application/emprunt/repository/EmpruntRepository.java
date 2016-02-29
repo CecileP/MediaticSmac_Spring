@@ -4,9 +4,12 @@ import java.util.List;
 
 import javax.persistence.TypedQuery;
 
+import org.springframework.stereotype.Repository;
+
 import fr.iocean.application.emprunt.model.Emprunt;
 import fr.iocean.application.repository.AbstractJpaRepository;
 
+@Repository
 public class EmpruntRepository extends AbstractJpaRepository<Emprunt> {
 
 	@Override

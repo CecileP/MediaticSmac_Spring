@@ -1,22 +1,18 @@
 package fr.iocean.application.adherents.model;
 
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.MappedSuperclass;
 
-@MappedSuperclass
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class Personne {
+@Embeddable
+public class Personne {
 
-	@Id
-	@GeneratedValue
-	protected Long ID;
-
-	@Column
-	protected String nom, prenom;
+	protected String nom;
+	protected String prenom;
 
 	public Personne() {
 	}
@@ -24,14 +20,6 @@ public abstract class Personne {
 	public Personne(String nom, String prenom) {
 		this.nom = nom;
 		this.prenom = prenom;
-	}
-
-	public Long getID() {
-		return ID;
-	}
-
-	public void setID(Long iD) {
-		ID = iD;
 	}
 
 	public String getNom() {

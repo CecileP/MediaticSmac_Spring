@@ -48,11 +48,6 @@ public abstract class Media implements IOEntity {
 
 	@NotBlank
 	private boolean emprunte;
-	
-	@Column(insertable=false, updatable=false )
-	protected String dtype;
-	
-	
 
 	public Media() {
 		emprunts = new ArrayList<Emprunt>();
@@ -143,7 +138,4 @@ public abstract class Media implements IOEntity {
 	public String toString() {
 		return "Media [ID=" + id + ", titre=" + titre + ", auteur=" + auteur + ", emprunte=" + emprunte + "]";
 	}
-
-	
-
 }

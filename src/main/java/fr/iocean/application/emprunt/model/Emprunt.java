@@ -17,6 +17,8 @@ import fr.iocean.application.persistence.IOEntity;
 @Entity
 public class Emprunt implements IOEntity {
 	
+	private static final long serialVersionUID = -1487635178830374220L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
@@ -29,14 +31,6 @@ public class Emprunt implements IOEntity {
 	
 	@Column
 	protected LocalDate dateEmprunt, dateRetour;
-
-	// lien avec adherent
-
-	///
-
-	// lien avec media
-
-	///
 
 	public Emprunt(Adherent a, Media m, LocalDate dateEmprunt) {
 		this.adherent = a;

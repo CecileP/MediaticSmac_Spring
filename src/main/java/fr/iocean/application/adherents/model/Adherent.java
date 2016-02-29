@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -16,24 +17,23 @@ import fr.iocean.application.media.model.Media;
 import fr.iocean.application.persistence.IOEntity;
 
 @Entity
-@Table(name = "adherent")
-public class Adherent extends Personne implements IOEntity{
-	
-	/**
-	 * 
-	 */
+public class Adherent implements IOEntity{
+
 	private static final long serialVersionUID = 1L;
 
 	@Column
 	protected LocalDate dateNaissance, dateCotisation;
-	
+
 	@OneToMany(mappedBy = "adherent")
 	protected Collection<Emprunt> listeMediaEmpruntes;
-	
+
+	@Embedded
+	private Personne personne;
+
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+
 	@Column
 	protected int montantCotisation;
 
@@ -42,7 +42,7 @@ public class Adherent extends Personne implements IOEntity{
 	}
 
 	public Adherent(String nom, String prenom, LocalDate date) {
-		super(nom, prenom);
+		this.personne = new Personne(nom, prenom);
 		this.dateNaissance = date;
 
 		listeMediaEmpruntes = new ArrayList<Emprunt>();
@@ -82,7 +82,7 @@ public class Adherent extends Personne implements IOEntity{
 
 
 	public String toString() {
-		return "Adherent [ID=" + ID + ", nom=" + nom + ", prenom=" + prenom + ", dateNaissance=" + dateNaissance
+		return "Adherent [ID=" + id + ", nom=" + this.personne.getNom() + ", prenom=" + this.personne.getPrenom() + ", dateNaissance=" + dateNaissance
 				+ ", dateCotisation=" + dateCotisation +  "]";
 
 	}
@@ -112,14 +112,12 @@ public class Adherent extends Personne implements IOEntity{
 
 	@Override
 	public Long getId() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.id;
 	}
 
 	@Override
 	public void setId(Long id) {
-		// TODO Auto-generated method stub
-		
+		this.id = id;
 	}
 
 }
