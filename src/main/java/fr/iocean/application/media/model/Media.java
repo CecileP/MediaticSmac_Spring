@@ -14,6 +14,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
@@ -41,6 +42,7 @@ public class Media implements IOEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Long id;
 
+	@NotNull
 	@Enumerated(EnumType.STRING)
 	private TypeMedia typeMedia;
 
@@ -77,12 +79,7 @@ public class Media implements IOEntity {
 		this.emprunts = new ArrayList<Emprunt>();
 		this.emprunte = false;
 		
-		this.typeMedia=null;
-		try {
-			this.typeMedia = TypeMedia.valueOf(type);
-		} catch (Exception e) {
-				throw new NotFoundException("type media non trouve : "+type);
-		}
+		this.typeMedia= convertStringToType(type);
 				
 	}
 
@@ -142,6 +139,17 @@ public class Media implements IOEntity {
 	}
 
 
+	public static TypeMedia convertStringToType(String type) throws NotFoundException{
+		TypeMedia typeMedia=null;
+		try {
+			typeMedia = TypeMedia.valueOf(type);
+		} catch (Exception e) {
+				throw new NotFoundException("type media non trouve : "+type);
+		}
+		return typeMedia;
+	}
+	
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
