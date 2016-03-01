@@ -1,5 +1,7 @@
 package fr.iocean.application.media.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,38 +28,36 @@ public class MediaController {
 	
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
-	//@PreAuthorize("hasAuthority('MANAGER_Media')")
 	public void create(@RequestBody @Valid Media resource) {
 		mediaService.create(resource);
 	}
 
 	@RequestMapping(value = "{id}", method = RequestMethod.GET)
 	@ResponseBody
-//	@PreAuthorize("hasAnyAuthority('MANAGER_Media','Media')")
 	public Media findById(@PathVariable Long id) throws NotFoundException {
 		return mediaService.findById(id);
 	}
 
-//	@RequestMapping(method = RequestMethod.GET)
-//	@ResponseBody
-//	@PreAuthorize("hasAnyAuthority('MANAGER_Media','Media')")
-//	public List<Media> findAll() {
-//		return mediaService.findAll();
-//	}
+	@RequestMapping(method = RequestMethod.GET)
+	@ResponseBody
+	public List<Media> findAll() {
+		return mediaService.findAll();
+	}
 	
 	@RequestMapping(value = "{id}", method = RequestMethod.PUT)
 	@ResponseBody
-//	@PreAuthorize("hasAuthority('MANAGER_Media')")
-	public Media update(@PathVariable Long id, @RequestBody @Valid Media resource) {
+	public Media update(@PathVariable Long id, @RequestBody @Valid Media resource) throws NotFoundException {
 		return mediaService.update(id, resource);
 	}
 	
 	@RequestMapping(value = "{id}",method = RequestMethod.DELETE)
-//	@PreAuthorize("hasAuthority('MANAGER_Media')")
 	public void delete(@PathVariable Long id) throws NotFoundException {
-		Media resource = mediaService.findById(id);
-		if(resource !=null)
-			mediaService.delete(resource);
+			mediaService.delete(id);
+	}
+	
+	@RequestMapping(value = "search",method = RequestMethod.GET)
+	public  List<Media> rechercheMedia(@PathVariable String titre, @PathVariable String auteur, @PathVariable String type) {
+		return mediaService.rechercheMedia(titre, auteur, type);
 	}
 	
 }

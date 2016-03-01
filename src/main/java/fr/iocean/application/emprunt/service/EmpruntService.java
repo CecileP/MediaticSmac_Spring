@@ -17,6 +17,7 @@ import fr.iocean.application.exception.NotFoundException;
 import fr.iocean.application.media.model.Media;
 import fr.iocean.application.media.model.Media.TypeMedia;
 import fr.iocean.application.media.service.MediaService;
+import fr.iocean.application.persistence.ConvertDate;
 
 
 @Repository
@@ -32,8 +33,8 @@ public class EmpruntService {
 	public void ajouter(Emprunt emprunt) {
 		Emprunt e = new Emprunt(emprunt);
 		if(e.getDateRetour()== null){
-			LocalDate retour = e.getDateEmprunt().plusDays(getNbJoursLoues(e.getMedia()));
-			e.setDateRetour(retour);
+			LocalDate retour = ConvertDate.dateToLocalDate(e.getDateEmprunt()).plusDays(getNbJoursLoues(e.getMedia()));
+			e.setDateRetour(ConvertDate.localDateToDate(retour));
 		}
 		this.repository.save(e);
 	}
@@ -43,8 +44,8 @@ public class EmpruntService {
 		e.setId(id);
 		Emprunt eOld=findById(id);
 		if(!e.getDateEmprunt().equals(eOld.getDateEmprunt())){
-			LocalDate retour = e.getDateEmprunt().plusDays(getNbJoursLoues(e.getMedia()));
-			e.setDateRetour(retour);
+			LocalDate retour = ConvertDate.dateToLocalDate(e.getDateEmprunt()).plusDays(getNbJoursLoues(e.getMedia()));
+			e.setDateRetour(ConvertDate.localDateToDate(retour));
 		}
 		
 		this.repository.update(e);
@@ -80,7 +81,7 @@ public class EmpruntService {
 		Adherent a;
 
 		try {
-			a = adherentService.findOne(id);
+			a = adherentService.findById(id);
 		} catch (NotFoundException e) {
 			return new ArrayList<>();
 		}

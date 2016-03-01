@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -52,7 +53,7 @@ public class Media implements IOEntity {
 	@Length(max=50)
 	private String auteur;
 
-	@OneToMany(mappedBy = "media")
+	@OneToMany(mappedBy = "media", fetch=FetchType.EAGER)
 	private List<Emprunt> emprunts;
 
 	private boolean emprunte;
@@ -62,7 +63,7 @@ public class Media implements IOEntity {
 		emprunte = false;
 	}
 	
-	protected Media(String titre, String auteur,TypeMedia type) {
+	public Media(String titre, String auteur,TypeMedia type) {
 		this.titre = titre;
 		this.auteur = auteur;
 		this.typeMedia=type;
@@ -70,7 +71,7 @@ public class Media implements IOEntity {
 		this.emprunte = false;
 	}
 	
-	protected Media(String titre, String auteur,String type) throws NotFoundException {
+	public Media(String titre, String auteur,String type) throws NotFoundException {
 		this.titre = titre;
 		this.auteur = auteur;
 		this.emprunts = new ArrayList<Emprunt>();

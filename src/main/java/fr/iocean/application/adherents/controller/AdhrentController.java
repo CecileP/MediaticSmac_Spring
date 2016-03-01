@@ -31,7 +31,7 @@ public class AdhrentController {
 
 	@RequestMapping(value = "{id}", method = RequestMethod.GET)
 	public Adherent findById(@PathVariable Long id) throws NotFoundException {
-		return adherentService.findOne(id);
+		return adherentService.findById(id);
 	}
 
 	// @PreAuthorize("hasAuthority('MANAGE_Adherent')")
@@ -51,7 +51,7 @@ public class AdhrentController {
 	// @PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	@RequestMapping(value = "{id}", method = RequestMethod.PUT)
 	@ResponseStatus(HttpStatus.OK)
-	public void update(@PathVariable Long id, @RequestBody @Valid Adherent resource) throws NotFoundException {
-		adherentService.update(id, resource);
+	public Adherent update(@PathVariable Long id, @RequestBody @Valid Adherent resource) throws NotFoundException {
+		return adherentService.update(id, resource);
 	}
 }

@@ -18,7 +18,7 @@ import fr.iocean.application.helper.JsonHelper;
 @SpringApplicationConfiguration(classes = FilRougeApplication.class)
 @WebAppConfiguration
 @Transactional
-public class IntegrationTest {
+public abstract class IntegrationTest {
 	
 	@Autowired
     protected WebApplicationContext webApplicationContext;

@@ -30,9 +30,8 @@ public class EmpruntController {
 			consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(code = HttpStatus.CREATED)
-	public Emprunt ajouter(@RequestBody @Valid Emprunt emprunt) {
+	public void ajouter(@RequestBody @Valid Emprunt emprunt) {
 		this.service.ajouter(emprunt);
-		return emprunt;
 	}
 
 	@RequestMapping(

@@ -3,29 +3,42 @@ package fr.iocean.application.adherents.model;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 import fr.iocean.application.emprunt.model.Emprunt;
 import fr.iocean.application.media.model.Media;
+import fr.iocean.application.persistence.ConvertDate;
 import fr.iocean.application.persistence.IOEntity;
 
 @Entity
-public class Adherent extends Personne implements IOEntity {
+public class Adherent implements IOEntity {
 
 	private static final long serialVersionUID = 1L;
 
-	@Column
-	protected LocalDate dateNaissance, dateCotisation;
+	@NotNull
+	@Temporal(TemporalType.DATE)
+	protected Date dateNaissance;
+	
+	@Temporal(TemporalType.DATE)
+	protected Date dateCotisation;
 
-	@OneToMany(mappedBy = "adherent")
+	@OneToMany(mappedBy = "adherent",fetch= FetchType.EAGER)
 	protected Collection<Emprunt> listeMediaEmpruntes;
 
+	@NotNull
 	@Embedded
 	protected Personne personne;
 
@@ -33,20 +46,63 @@ public class Adherent extends Personne implements IOEntity {
 	@GeneratedValue
 	private Long id;
 
+	@NotNull
+	@NotBlank
+	private String adresseMail;
+
 	@Column
-	protected int montantCotisation;
+	private int montantCotisation;
+	private String adresse;
+	private Integer codePostal;
+	private String ville;
+
+	
 
 	public Adherent() {
 		listeMediaEmpruntes = new ArrayList<Emprunt>();
+		this.personne = new Personne();
 	}
 
-	public Adherent(String nom, String prenom, LocalDate date) {
+	public Adherent(String nom, String prenom, Date date) {
 		this.personne = new Personne(nom, prenom);
 		this.dateNaissance = date;
-
 		listeMediaEmpruntes = new ArrayList<Emprunt>();
 	}
 
+	
+	public String getAdresse() {
+		return adresse;
+	}
+
+	public void setAdresse(String adresse) {
+		this.adresse = adresse;
+	}
+
+	public Integer getCodePostal() {
+		return codePostal;
+	}
+
+	public void setCodePostal(Integer codePostal) {
+		this.codePostal = codePostal;
+	}
+
+	public String getVille() {
+		return ville;
+	}
+
+	public void setVille(String ville) {
+		this.ville = ville;
+	} 
+	
+	
+	public String getAdresseMail() {
+		return adresseMail;
+	}
+
+	public void setAdresseMail(String adresseMail) {
+		this.adresseMail = adresseMail;
+	}
+	
 	public Personne getPersonne() {
 		return personne;
 	}
@@ -71,24 +127,26 @@ public class Adherent extends Personne implements IOEntity {
 		return listeMediaEmpruntes.remove(m);
 	}
 
-	public LocalDate getDateNaissance() {
+	public Date getDateNaissance() {
 		return dateNaissance;
 	}
 
-	public void setDateNaissance(LocalDate dateNaissance) {
+	public void setDateNaissance(Date dateNaissance) {
 		this.dateNaissance = dateNaissance;
 	}
 
-	public LocalDate getDateCotisation() {
+	public Date getDateCotisation() {
 		return dateCotisation;
 	}
 
-	public void setDateCotisation(LocalDate dateCotisation) {
+	public void setDateCotisation(Date dateCotisation) {
 		this.dateCotisation = dateCotisation;
 	}
 
 	public int calculAge() {
 		int d1, m1, a1;
+		LocalDate dateNaissance = ConvertDate.dateToLocalDate(this.dateNaissance);
+
 		d1 = dateNaissance.getDayOfMonth();
 		m1 = dateNaissance.getMonthValue();
 		a1 = dateNaissance.getYear();
@@ -120,4 +178,14 @@ public class Adherent extends Personne implements IOEntity {
 		this.id = id;
 	}
 
+	@Override
+	public String toString() {
+		return "Adherent [dateNaissance=" + dateNaissance + ", dateCotisation=" + dateCotisation
+				+ ", listeMediaEmpruntes=" + listeMediaEmpruntes + ", nom=" + personne.getNom()+", prenom="+personne.getPrenom() + ", id=" + id
+				+ ", adresseMail=" + adresseMail + ", montantCotisation=" + montantCotisation + ", adresse=" + adresse
+				+ ", codePostal=" + codePostal + ", ville=" + ville + "]";
+	}
+
+	
+	
 }
