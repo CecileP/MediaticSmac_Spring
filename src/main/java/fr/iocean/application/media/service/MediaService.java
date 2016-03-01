@@ -51,7 +51,7 @@ public class MediaService {
 	}
 	
 	
-	public List<Media> rechercheMedia(String titre, String auteur, String type){
+	public List<Media> rechercheMedia(String titre, String auteur, String type) throws NotFoundException{
 		return this.mediaRepository.rechercheMedia(titre, auteur, type);
 	}
 	

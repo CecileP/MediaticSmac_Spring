@@ -125,17 +125,41 @@ public class MediaIT extends IntegrationTest {
 	
 	/*--------------recherche------------------*/
 	
-//	@Test(expected=NotFoundException.class)
-//	public void testDelete() throws Exception{
-//		Media u = mediaService.findById(1l);
-//		assertNotNull(u);
-//		
-//		this.mockMvc.perform(delete("/api/medias/{id}",1))
-//					.andExpect(status().isOk());
-//		
-//		Media uDelete = mediaService.findById(1l);
-//		assertNull(uDelete);
-//	}
-//	rechercheMedia
-//	
+	@Test
+	public void testRechercheMedia() throws Exception{
+		
+		this.mockMvc.perform(get("/api/medias/search")
+					.param("titre", "t")
+		            .param("auteur", "au")
+		            .param("type", TypeMedia.DVD.toString()))
+				.andDo(MockMvcResultHandlers.print())
+				.andExpect(jsonPath("$",hasSize(1)))
+				.andExpect(status().isOk());
+	}
+
+	@Test
+	public void testRechercheMedia1() throws Exception{
+		
+		this.mockMvc.perform(get("/api/medias/search")
+					.param("titre", "t")
+		            .param("auteur", "au")
+		            .param("type", "")
+				)
+				.andDo(MockMvcResultHandlers.print())
+				.andExpect(jsonPath("$",hasSize(2)))
+				.andExpect(status().isOk());
+	}
+	
+	@Test
+	public void testRechercheMedia2() throws Exception{
+		
+		this.mockMvc.perform(get("/api/medias/search")
+					.param("titre", "")
+		            .param("auteur", "")
+		            .param("type", "")
+				)
+				.andDo(MockMvcResultHandlers.print())
+				.andExpect(jsonPath("$",hasSize(2)))
+				.andExpect(status().isOk());
+	}
 }

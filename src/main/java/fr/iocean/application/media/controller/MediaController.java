@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -56,7 +57,8 @@ public class MediaController {
 	}
 	
 	@RequestMapping(value = "search",method = RequestMethod.GET)
-	public  List<Media> rechercheMedia(@PathVariable String titre, @PathVariable String auteur, @PathVariable String type) {
+	@ResponseBody
+	public  List<Media> rechercheMedia(@RequestParam("titre") String titre, @RequestParam("auteur") String auteur, @RequestParam("type") String type) throws NotFoundException {
 		return mediaService.rechercheMedia(titre, auteur, type);
 	}
 	
