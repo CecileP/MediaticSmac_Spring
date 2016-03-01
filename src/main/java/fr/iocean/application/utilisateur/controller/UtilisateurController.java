@@ -20,7 +20,7 @@ import fr.iocean.application.utilisateur.service.UtilisateurService;
 @RestController
 @RequestMapping("/api/users")
 public class UtilisateurController {
-	
+
 	@Autowired
 	UtilisateurService utilisateurService;
 
@@ -34,24 +34,24 @@ public class UtilisateurController {
 		return utilisateurService.findOne(id);
 	}
 
-	//@PreAuthorize("hasAuthority('MANAGE_USER')")
+	// @PreAuthorize("hasAuthority('MANAGE_USER')")
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
 	public void create(@RequestBody @Valid Utilisateur resource) {
 		utilisateurService.save(resource);
 	}
 
-//	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
+	// @PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
 	@ResponseStatus(HttpStatus.OK)
 	public void delete(@PathVariable Long id) throws NotFoundException {
 		utilisateurService.delete(id);
 	}
-	
-//	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
+
+	// @PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	@RequestMapping(value = "{id}", method = RequestMethod.PUT)
 	@ResponseStatus(HttpStatus.OK)
 	public void update(@PathVariable Long id, @RequestBody @Valid Utilisateur resource) throws NotFoundException {
-		utilisateurService.updateUtilisateur(id,resource);
+		utilisateurService.updateUtilisateur(id, resource);
 	}
 }

@@ -16,8 +16,6 @@ import javax.persistence.UniqueConstraint;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
 
 import fr.iocean.application.emprunt.model.Emprunt;
 import fr.iocean.application.exception.NotFoundException;

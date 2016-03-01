@@ -28,6 +28,7 @@ public class Utilisateur extends Personne implements IOEntity {
 		super();
 	}
 
+
 	public Utilisateur(String nom, String prenom) {
 		super(nom, prenom);
 	}
@@ -36,6 +37,14 @@ public class Utilisateur extends Personne implements IOEntity {
 		super(nom, prenom);
 		this.login = login;
 		this.motDePasse = motDePasse;
+	}
+
+	public Personne getPersonne() {
+		return personne;
+	}
+
+	public void setPersonne(Personne personne) {
+		this.personne = personne;
 	}
 
 	public String getLogin() {
@@ -60,8 +69,7 @@ public class Utilisateur extends Personne implements IOEntity {
 	private String motDePasse;
 	@Override
 	public Long getId() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.id;
 	}
 
 	@Override
