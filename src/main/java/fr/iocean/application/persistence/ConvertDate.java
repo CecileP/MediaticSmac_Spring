@@ -25,4 +25,12 @@ public class ConvertDate implements AttributeConverter<LocalDate, Date> {
 	public static java.util.Date localDateToDate(LocalDate ld) {
 		return Date.from(ld.atStartOfDay(ZoneId.systemDefault()).toInstant());
 	}
+	
+//	public static LocalDate dateToLocalDateSql(java.sql.Date d) {
+//		return d.toLocalDate();
+//	}
+//
+//	public static java.sql.Date localDateToDateSql(LocalDate ld) {
+//		return Date.valueOf(ld);
+//	}
 }

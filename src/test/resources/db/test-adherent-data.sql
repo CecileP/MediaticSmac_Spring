@@ -1,2 +1,2 @@
-insert into adherent (nom, prenom,date_naissance,montant_cotisation,adresse_mail) values ('lulu','roger','1992-03-04',456,'@gh');
-insert into adherent (nom, prenom,date_naissance,montant_cotisation,adresse_mail) values ('trtr','cle','1992-08-07',123,'@trtr');
+insert into adherent (id,nom, prenom,date_naissance,montant_cotisation,adresse_mail) values (1,'lulu','roger',DATE '1992-03-04',456,'@gh');
+insert into adherent (id,nom, prenom,date_naissance,montant_cotisation,adresse_mail) values (2,'trtr','cle',DATE '1992-08-07',123,'@trtr');

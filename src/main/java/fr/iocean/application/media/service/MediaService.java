@@ -34,7 +34,10 @@ public class MediaService {
 		return this.mediaRepository.findOne(id);
 	}
 
-	public Media update(Long id, Media resource) {
+	public Media update(Long id, Media resource) throws NotFoundException {
+		if( this.findById(id)==null){
+			throw new NotFoundException();
+		}
 		resource.setId(id);
 		return this.mediaRepository.save(resource);
 	}
@@ -43,7 +46,8 @@ public class MediaService {
 		return this.mediaRepository.findAll();
 	}
 	
-	public void delete(Media resource){
+	public void delete(Long id) throws NotFoundException{
+		Media resource = findById(id);
 		this.mediaRepository.delete(resource);
 	}
 	

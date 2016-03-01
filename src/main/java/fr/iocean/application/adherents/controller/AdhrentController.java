@@ -51,7 +51,7 @@ public class AdhrentController {
 	// @PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	@RequestMapping(value = "{id}", method = RequestMethod.PUT)
 	@ResponseStatus(HttpStatus.OK)
-	public void update(@PathVariable Long id, @RequestBody @Valid Adherent resource) throws NotFoundException {
-		adherentService.update(id, resource);
+	public Adherent update(@PathVariable Long id, @RequestBody @Valid Adherent resource) throws NotFoundException {
+		return adherentService.update(id, resource);
 	}
 }

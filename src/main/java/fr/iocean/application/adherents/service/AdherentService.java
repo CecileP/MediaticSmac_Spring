@@ -23,19 +23,16 @@ public class AdherentService {
 		return adherentRepository.findAll();
 	}
 	
-	public void update(Long id, Adherent adherent) throws NotFoundException {
-		Adherent a = adherentRepository.findOne(id);
-		
-		if (a.getId() == adherent.getId()) {
-			adherentRepository.save(adherent);
+	public Adherent update(Long id, Adherent adherent) throws NotFoundException {
+		if(adherentRepository.findOne(id)==null){
+			throw new NotFoundException();
 		}
+		adherent.setId(id);
+		return adherentRepository.save(adherent);
 	}
 
 	public Adherent findById(Long id) throws NotFoundException {
 		Adherent a = adherentRepository.findOne(id);
-
-		if (a == null)
-			throw new NotFoundException();
 		return a;
 	}
 

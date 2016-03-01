@@ -10,10 +10,10 @@ public class Personne {
 
 	@NotNull
 	@NotBlank
-	protected String nom;
+	private String nom;
 	@NotNull
 	@NotBlank
-	protected String prenom;
+	private String prenom;
 
 	public Personne() {
 	}

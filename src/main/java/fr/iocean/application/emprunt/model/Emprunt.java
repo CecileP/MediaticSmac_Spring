@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -28,14 +30,17 @@ public class Emprunt implements IOEntity {
 	private Long id;
 
 	@ManyToOne
-	protected Adherent adherent;
+	private Adherent adherent;
 	
 	@ManyToOne
 	@JsonIgnoreProperties("emprunts")
-	protected Media media;
+	private Media media;
 	
-	protected Date dateEmprunt;
-	protected Date dateRetour;
+	@Temporal(TemporalType.DATE)
+	private Date dateEmprunt;
+	
+	@Temporal(TemporalType.DATE)  
+	private Date dateRetour;
 
 	public Emprunt(Adherent a, Media m, Date dateEmprunt) {
 		this.adherent = a;

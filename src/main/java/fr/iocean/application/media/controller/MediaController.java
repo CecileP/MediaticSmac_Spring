@@ -46,15 +46,18 @@ public class MediaController {
 	
 	@RequestMapping(value = "{id}", method = RequestMethod.PUT)
 	@ResponseBody
-	public Media update(@PathVariable Long id, @RequestBody @Valid Media resource) {
+	public Media update(@PathVariable Long id, @RequestBody @Valid Media resource) throws NotFoundException {
 		return mediaService.update(id, resource);
 	}
 	
 	@RequestMapping(value = "{id}",method = RequestMethod.DELETE)
 	public void delete(@PathVariable Long id) throws NotFoundException {
-		Media resource = mediaService.findById(id);
-		if(resource !=null)
-			mediaService.delete(resource);
+			mediaService.delete(id);
+	}
+	
+	@RequestMapping(value = "search",method = RequestMethod.GET)
+	public  List<Media> rechercheMedia(@PathVariable String titre, @PathVariable String auteur, @PathVariable String type) {
+		return mediaService.rechercheMedia(titre, auteur, type);
 	}
 	
 }

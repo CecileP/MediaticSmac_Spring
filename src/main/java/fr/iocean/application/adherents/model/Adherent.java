@@ -12,6 +12,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -22,13 +24,15 @@ import fr.iocean.application.persistence.ConvertDate;
 import fr.iocean.application.persistence.IOEntity;
 
 @Entity
-public class Adherent extends Personne implements IOEntity {
+public class Adherent implements IOEntity {
 
 	private static final long serialVersionUID = 1L;
 
 	@NotNull
+	@Temporal(TemporalType.DATE)
 	protected Date dateNaissance;
 	
+	@Temporal(TemporalType.DATE)
 	protected Date dateCotisation;
 
 	@OneToMany(mappedBy = "adherent",fetch= FetchType.EAGER)
@@ -56,12 +60,12 @@ public class Adherent extends Personne implements IOEntity {
 
 	public Adherent() {
 		listeMediaEmpruntes = new ArrayList<Emprunt>();
+		this.personne = new Personne();
 	}
 
 	public Adherent(String nom, String prenom, Date date) {
 		this.personne = new Personne(nom, prenom);
 		this.dateNaissance = date;
-
 		listeMediaEmpruntes = new ArrayList<Emprunt>();
 	}
 
@@ -174,4 +178,14 @@ public class Adherent extends Personne implements IOEntity {
 		this.id = id;
 	}
 
+	@Override
+	public String toString() {
+		return "Adherent [dateNaissance=" + dateNaissance + ", dateCotisation=" + dateCotisation
+				+ ", listeMediaEmpruntes=" + listeMediaEmpruntes + ", nom=" + personne.getNom()+", prenom="+personne.getPrenom() + ", id=" + id
+				+ ", adresseMail=" + adresseMail + ", montantCotisation=" + montantCotisation + ", adresse=" + adresse
+				+ ", codePostal=" + codePostal + ", ville=" + ville + "]";
+	}
+
+	
+	
 }
