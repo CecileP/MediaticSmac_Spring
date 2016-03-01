@@ -34,14 +34,14 @@ public class AdhrentController {
 		return adherentService.findById(id);
 	}
 
-	// @PreAuthorize("hasAuthority('MANAGE_Adherent')")
+//	 @PreAuthorize("hasAuthority('MANAGE_Adherent')")
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
 	public void create(@RequestBody @Valid Adherent resource) {
 		adherentService.save(resource);
 	}
 
-	// @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+	// @PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
 	@ResponseStatus(HttpStatus.OK)
 	public void delete(@PathVariable Long id) throws NotFoundException {

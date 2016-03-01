@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import fr.iocean.application.exception.NotFoundException;
@@ -17,12 +18,12 @@ public class UtilisateurService {
 	
 	@Autowired
 	UtilisateurRepository utilisateurRepository;
-//	@Autowired
-//	PasswordEncoder passwordEncoder;
+	@Autowired
+	PasswordEncoder passwordEncoder;
 
 	public void save(Utilisateur Utilisateur) {
 		Utilisateur usr = Utilisateur;
-		//usr.setPassword(passwordEncoder.encode(usr.getPassword()));
+		usr.setMotDePasse(passwordEncoder.encode(usr.getMotDePasse()));
 		utilisateurRepository.save(usr);
 
 	}
@@ -40,7 +41,7 @@ public class UtilisateurService {
 
 		if (u.getId() == Utilisateur.getId()) {
 			Utilisateur usr = Utilisateur;
-			//usr.setPassword(passwordEncoder.encode(usr.getPassword()));
+			usr.setMotDePasse(passwordEncoder.encode(usr.getMotDePasse()));
 			utilisateurRepository.save(usr);
 		}
 	}
