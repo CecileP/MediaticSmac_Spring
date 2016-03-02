@@ -22,6 +22,7 @@ import fr.iocean.application.media.service.MediaService;
 
 @RestController
 @RequestMapping("/api/medias")
+//@CrossOrigin(origins="")
 public class MediaController {
 
 	@Autowired

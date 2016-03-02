@@ -22,6 +22,7 @@ import fr.iocean.application.adherents.model.Adherent;
 import fr.iocean.application.adherents.service.AdherentService;
 import fr.iocean.application.emprunt.model.Emprunt;
 import fr.iocean.application.media.model.Media;
+import fr.iocean.application.media.model.Media.TypeMedia;
 import fr.iocean.application.media.service.MediaService;
 
 import static fr.iocean.application.persistence.ConvertDate.*;
@@ -33,6 +34,12 @@ public class EmpruntIT extends IntegrationTest {
 	public MediaService mediaService;
 	@Autowired
 	public AdherentService adherentService;
+	
+	@Test
+	public void test() {
+		Media m = new Media("test", "test", TypeMedia.CD);
+		jsonHelper.serialize(m);
+	}
 	
 	@Test
 	public void testFindAll() throws Exception {

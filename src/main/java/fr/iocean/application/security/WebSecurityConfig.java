@@ -36,10 +36,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
 		.and().authorizeRequests()
-				.antMatchers( "/api/authenticate", "/api/users")
+				.antMatchers( "/api/**")
 				.permitAll()
-				.antMatchers("/api" + "/**")
-				.authenticated()
+//				.antMatchers("/api" + "/**")
+//				.authenticated()
 				.and()
 				.formLogin()
 				.usernameParameter("login")
