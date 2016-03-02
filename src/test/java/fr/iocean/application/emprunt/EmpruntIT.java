@@ -43,36 +43,53 @@ public class EmpruntIT extends IntegrationTest {
 	
 	@Test
 	public void testFindAll() throws Exception {
-		this.mockMvc.perform(get("/api/emprunts")).andExpect(status().isOk()).andExpect(jsonPath("$", hasSize(2)))
-				.andExpect(jsonPath("$[0].id", equalTo(20))).andExpect(jsonPath("$[1].id", equalTo(21)));
+		this.mockMvc
+				.perform(get("/api/emprunts"))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$", hasSize(2)))
+				.andExpect(jsonPath("$[0].id", equalTo(20)))
+				.andExpect(jsonPath("$[1].id", equalTo(21)));
 	}
 
 	@Test
 	public void testRechercheParMediaExistant() throws Exception {
-		this.mockMvc.perform(get("/api/emprunts/media/1")).andExpect(status().isOk())
-				.andExpect(jsonPath("$", hasSize(1))).andExpect(jsonPath("$[0].id", equalTo(20)));
+		this.mockMvc
+				.perform(get("/api/emprunts/media/1"))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$", hasSize(1)))
+				.andExpect(jsonPath("$[0].id", equalTo(20)));
 
-		this.mockMvc.perform(get("/api/emprunts/media/2")).andExpect(status().isOk())
-				.andExpect(jsonPath("$", hasSize(1))).andExpect(jsonPath("$[0].id", equalTo(21)));
+		this.mockMvc
+				.perform(get("/api/emprunts/media/2"))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$", hasSize(1)))
+				.andExpect(jsonPath("$[0].id", equalTo(21)));
 	}
 
 	@Test
 	public void testRechercheParMediaInexistant() throws Exception {
-		this.mockMvc.perform(get("/api/emprunts/media/100")).andExpect(status().isOk())
+		this.mockMvc
+				.perform(get("/api/emprunts/media/100"))
+				.andExpect(status().isOk())
 				.andExpect(jsonPath("$", hasSize(0)));
 	}
 
 	@Test
 	public void testRechercheParAdherentExistant() throws Exception {
-		this.mockMvc.perform(get("/api/emprunts/adherent/10")).andExpect(status().isOk())
-				.andExpect(jsonPath("$", hasSize(2))).andExpect(jsonPath("$[0].id", equalTo(20)))
+		this.mockMvc
+				.perform(get("/api/emprunts/adherent/10"))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$", hasSize(2)))
+				.andExpect(jsonPath("$[0].id", equalTo(20)))
 				.andExpect(jsonPath("$[1].id", equalTo(21)));
 		;
 	}
 
 	@Test
 	public void testRechercheParAdherentInexistant() throws Exception {
-		this.mockMvc.perform(get("/api/emprunts/media/100")).andExpect(status().isOk())
+		this.mockMvc
+				.perform(get("/api/emprunts/media/100"))
+				.andExpect(status().isOk())
 				.andDo(MockMvcResultHandlers.print())
 				.andExpect(jsonPath("$", hasSize(0)));
 	}
@@ -82,21 +99,26 @@ public class EmpruntIT extends IntegrationTest {
 
 		Media m=  mediaService.findById(1L);
 		Adherent a = adherentService.findById(10L);
-		
+
 		LocalDate dateEmprunt = LocalDate.of(2016,03,02);
 		Emprunt e = new Emprunt(a, m, localDateToDate(dateEmprunt));
 
-		
 		System.out.println(jsonHelper.serialize(e));
 		this.mockMvc
-				.perform(post("/api/emprunts").contentType(MediaType.APPLICATION_JSON).characterEncoding("UTF-8")
-						.content(jsonHelper.serialize(e)))
+				.perform(
+						post("/api/emprunts")
+								.contentType(MediaType.APPLICATION_JSON)
+								.characterEncoding("UTF-8")
+								.content(jsonHelper.serialize(e)
+						)
+				)
 				.andDo(MockMvcResultHandlers.print())
 				.andExpect(status().isCreated());
-		
-		this.mockMvc.perform(get("/api/emprunts"))
-		.andDo(MockMvcResultHandlers.print())
-		.andExpect(jsonPath("$",hasSize(3)))
-		.andExpect(status().isOk());
+
+		this.mockMvc
+				.perform(get("/api/emprunts"))
+				.andDo(MockMvcResultHandlers.print())
+				.andExpect(jsonPath("$",hasSize(3)))
+				.andExpect(status().isOk());
 	}
 }

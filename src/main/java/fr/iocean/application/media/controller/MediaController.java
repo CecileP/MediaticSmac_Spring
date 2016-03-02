@@ -59,7 +59,10 @@ public class MediaController {
 	
 	@RequestMapping(value = "search",method = RequestMethod.GET)
 	@ResponseBody
-	public  List<Media> rechercheMedia(@RequestParam("titre") String titre, @RequestParam("auteur") String auteur, @RequestParam("type") String type) throws NotFoundException {
+	public  List<Media> rechercheMedia(
+			@RequestParam(required=false) String titre,
+			@RequestParam(required=false) String auteur,
+			@RequestParam(required=false) String type) throws NotFoundException {
 		return mediaService.rechercheMedia(titre, auteur, type);
 	}
 	
