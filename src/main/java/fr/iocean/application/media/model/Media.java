@@ -162,12 +162,12 @@ public class Media implements IOEntity {
 		if (auteur == null) {
 			if (other.auteur != null)
 				return false;
-		} else if (!auteur.toLowerCase().equals(other.auteur.toLowerCase()))
+		} else if (!auteur.equalsIgnoreCase(other.auteur))
 			return false;
 		if (titre == null) {
 			if (other.titre != null)
 				return false;
-		} else if (!titre.toLowerCase().equals(other.titre.toLowerCase()))
+		} else if (!titre.equalsIgnoreCase(other.titre))
 			return false;
 		return true;
 	}
